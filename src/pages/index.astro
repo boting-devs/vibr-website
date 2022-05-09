@@ -1,6 +1,7 @@
 ---
 // SPDX-License-Identifier: MIT
 import Head from "../components/Head.astro";
+import Home from "../components/sections/Home.astro";
 ---
 
 <!DOCTYPE html>
@@ -9,11 +10,11 @@ import Head from "../components/Head.astro";
     <Head />
   </head>
 
-  <body>
-    <div class="bg-purple-700">
-      <section class="p-10 text-5xl flex justify-center items-center">
-        <h1 class="text-white">text</h1>
+  <body class="m-0 p-0 box-border">
+    <main class="h-full bg-[#272934] text-white font-normal">
+      <section class="flex w-full justify-center h-full">
+      <Home />
       </section>
-    </div>
+    </main>
   </body>
 </html>
