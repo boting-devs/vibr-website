@@ -14,7 +14,7 @@ module.exports = {
           500: "#008FFF",
         },
       },
-      backgroundImage: { main: "url('/background.png')" },
+      backgroundImage: { main: "url('/background.webp')" },
     },
   },
   plugins: [],
