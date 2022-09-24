@@ -1,6 +1,6 @@
 ---
 // SPDX-License-Identifier: MIT
-import Head from "../components/Head.astro";
+import Head from "../components/common/Head.astro";
 import Home from "../components/sections/Home.astro";
 import Nav from "../components/common/Nav.astro";
 ---
@@ -11,15 +11,15 @@ import Nav from "../components/common/Nav.astro";
     <Head
       title="Vibr Music Bot"
       description="A music bot you can vibe with :)"
-      url="https://cdn.discordapp.com/avatars/882491278581977179/75a4e9b652b67615199405c14a670e08.png"
+      url="/logo.webp"
       color="#8000FF"
     />
   </head>
 
-  <body class="bg-main bg-clip-border bg-no-repeat bg-cover">
+  <body class="home-bg">
     <Nav />
-    <main class="h-screen text-white font-normal">
-      <section class="flex w-full h-screen">
+    <main class="text-white font-normal">
+      <section class="flex w-full">
         <Home />
       </section>
     </main>

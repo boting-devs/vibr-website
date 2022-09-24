@@ -13,8 +13,12 @@ module.exports = {
           400: "#2500FF",
           500: "#008FFF",
         },
+        home: "#272934",
       },
-      backgroundImage: { main: "url('/background.webp')" },
+      backgroundImage: {
+        main: "url('/background.webp')",
+        nav: "linear-gradient(to top, rgba(39, 41, 52, 0), rgba(39, 41, 52, 1) 25%)",
+      },
     },
   },
   plugins: [],
