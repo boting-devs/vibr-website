@@ -6,5 +6,5 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://vibr.boting.xyz",
-  integrations: [tailwind({ applyBaseStyles: false }), sitemap()],
+  integrations: [tailwind({ config: { applyBaseStyles: false } }), sitemap()],
 });

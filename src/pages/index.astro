@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 import Head from "../components/Head.astro";
 import Home from "../components/sections/Home.astro";
+import Nav from "../components/common/Nav.astro";
 ---
 
 <!DOCTYPE html>
@@ -15,7 +16,8 @@ import Home from "../components/sections/Home.astro";
     />
   </head>
 
-  <body class="m-0 p-0 box-border bg-main bg-clip-border bg-no-repeat bg-cover ">
+  <body class="bg-main bg-clip-border bg-no-repeat bg-cover">
+    <Nav />
     <main class="h-screen text-white font-normal">
       <section class="flex w-full h-screen">
         <Home />
