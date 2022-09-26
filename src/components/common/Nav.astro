@@ -8,6 +8,17 @@ const links: Record<string, string> = {
 };
 ---
 
-<nav class="p-5 bg-nav pb-10">
+<nav class="p-5 bg-nav pb-10 flex items-center w-screen justify-between fixed">
   <a href="#"><img src="/logo.webp" alt="Vibr's logo" width="64" height="64" /></a>
+  <ul class="text-white font-bold text-xl flex flex-row">
+    {
+      Object.entries(links).map(([name, link]) => (
+        <>
+          <li class="mx-5">
+            <a href={link}>{name}</a>
+          </li>
+        </>
+      ))
+    }
+  </ul>
 </nav>
