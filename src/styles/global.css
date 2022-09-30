@@ -10,3 +10,6 @@ bg image looked awful on mobile, did not scale properly for tablet, perfect for 
 .home-bg {
   @apply bg-clip-padding bg-no-repeat bg-cover md:bg-main lg:bg-contain bg-fixed bg-center bg-home;
 }
+.title{
+  @apply relative text-center text-4xl font-medium mb-14 pb-5 font-sans
+}
