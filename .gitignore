@@ -18,3 +18,5 @@ yarn-error.log*
 
 # Ignore local gitignore
 !.vscode
+
+fontawesome*

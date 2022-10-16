@@ -1,42 +1,70 @@
 ---
 // SPDX-License-Identifier: MIT
+interface Feature {
+  title: string;
+  description: string;
+  class: string[];
+}
+const features: Feature[] = [
+  {
+    title: "Play Music",
+    description:
+      "Play any music straight from Discord from YouTube, Spotify, SoundCloud and more...",
+    class: ["fas", "fa-robot"],
+  },
+  // FIXME:
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+  {
+    title: "A playlist",
+    description: "This is a placeholder feature, this needs to be replaced.",
+    class: ["fas", "fa-robot"],
+  },
+];
 ---
 
-<div class="bg-[#111] text-[#fff] pl-[10px]">
-  <div class="max-w-[1300px] py-20 px-0 m-auto">
-    <h2 class="title before:bg-[#fff]">Features</h2>
+<section class="bg-slate-900 text-white">
+  <h2 class="text-center text-4xl font-medium mb-14 pb-5 font-sans text-white">
+    Features
+  </h2>
 
-    <div class="flex flex-wrap items-center justify-between">
-      <div
-        class="w-[calc(25%-20px)] bg-blue-700 text-center rounded-md py-12 px-6 cursor-pointer"
-      >
-        <i class="fas fa-robot"></i>
-        <div class="text-[25px] font-medium mt-3 mb-2">Play Music</div>
-        <p class="text-lg">
-          Play any music straight on your discord from youtube ,spotify and soundcloud.
-        </p>
-      </div>
-      <div
-        class="w-[calc(25%-20px)] bg-blue-700 text-center rounded-md py-12 px-6 cursor-pointer"
-      >
-        <i class=""></i>
-        <div class="text-[25px] font-medium mt-3 mb-2">Play Music</div>
-        <p class="text-lg">Play Music straight on your discord</p>
-      </div>
-      <div
-        class="w-[calc(25%-20px)] bg-blue-700 text-center rounded-md py-12 px-6 cursor-pointer"
-      >
-        <i class=""></i>
-        <div class="text-[25px] font-medium mt-3 mb-2">Play Music</div>
-        <p class="text-lg">Play Music straight on your discord</p>
-      </div>
-      <div
-        class="w-[calc(25%-20px)] bg-blue-700 text-center rounded-md py-12 px-6 cursor-pointer"
-      >
-        <i class=""></i>
-        <div class="text-[25px] font-medium mt-3 mb-2">Play Music</div>
-        <p class="text-lg">Play Music straight on your discord</p>
-      </div>
-    </div>
-  </div>
-</div>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-items-center m-auto w-auto">
+    {
+      features.map((feature) => (
+        <li class="bg-blue-700 text-center rounded-md p-6 m-3 max-w-sm">
+          <i class:list={feature.class} />
+          <h5 class="text-lg font-medium mt-3 mb-2">{feature.title}</h5>
+          <p class="text-lg">{feature.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
