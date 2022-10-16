@@ -1,4 +1,5 @@
 ---
+// SPDX-License-Identifier: MIT
 const links: Record<string, string> = {
   Home: "/",
   Support: "/support",
@@ -8,7 +9,7 @@ const links: Record<string, string> = {
 };
 ---
 
-<nav class="p-5 bg-nav pb-10 flex items-center w-screen justify-between fixed">
+<nav class="p-5 bg-nav pb-10 flex items-center w-screen justify-between fixed z-[99]">
   <a href="#"><img src="/logo.webp" alt="Vibr's logo" width="64" height="64" /></a>
   <ul class="text-white font-bold text-xl flex flex-row">
     {

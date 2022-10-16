@@ -14,7 +14,7 @@ module.exports = {
           500: "#008FFF",
         },
         home: "#272934",
-        grey_vibr:"#aca4b5",
+        grey_vibr: "#aca4b5",
       },
       backgroundImage: {
         main: "url('/background.webp')",
