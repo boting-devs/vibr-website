@@ -30,6 +30,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@astrojs/tailwind", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.1.2"],\
             ["astro", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:2.4.5"],\
+            ["prettier", "npm:2.8.8"],\
+            ["prettier-plugin-astro", "npm:0.8.1"],\
             ["tailwindcss", "npm:3.3.2"]\
           ],\
           "linkType": "SOFT"\
@@ -4803,6 +4805,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["root-workspace-0b6124", "workspace:."],\
             ["@astrojs/tailwind", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.1.2"],\
             ["astro", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:2.4.5"],\
+            ["prettier", "npm:2.8.8"],\
+            ["prettier-plugin-astro", "npm:0.8.1"],\
             ["tailwindcss", "npm:3.3.2"]\
           ],\
           "linkType": "SOFT"\
