@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -9,7 +10,12 @@ module.exports = {
         sans: ["Poppins", ...defaultTheme.fontFamily.sans],
       },
     },
-    colors: {
+    colors: ({ theme }) => ({
+      white: colors.white,
+      black: colors.black,
+      transparent: colors.transparent,
+      currentColor: colors.currentColor,
+      inherit: colors.inherit,
       purple: {
         100: "hsl(263, 84%, 11%)",
         200: "hsl(262, 80%, 19%)",
@@ -54,7 +60,7 @@ module.exports = {
         800: "hsl(360, 90%, 86%)",
         900: "hsl(360, 100%, 93%)",
       },
-    },
+    }),
   },
   plugins: [],
 };
