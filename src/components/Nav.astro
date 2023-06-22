@@ -3,10 +3,34 @@ import { Image } from "@astrojs/image/components";
 ---
 
 <nav class="p-3 flex items-center justify-between">
-  <Image src="/vibr.png" class="mr-5" width={64} height={64} alt="Vibr logo" format="webp" />
+  <Image
+    src="/vibr.png"
+    class="mr-5"
+    width={64}
+    height={64}
+    alt="Vibr logo"
+    format="webp"
+  />
   <ul class="flex text-lg font-semibold">
     <li><a href="" class="m-3">Support</a></li>
     <li><a href="" class="m-3">Donate</a></li>
-    <li><a href="" class="m-3 from-purple-500 to-teal-500 bg-gradient-to-br rounded-lg px-3 py-2">Extra Bots</a></li>
+    <li>
+      <a
+        href=""
+        class="h m-3 transition-all duration-200 ease-linear from-purple-500 to-teal-500 bg-gradient-to-br rounded-lg px-3 py-2"
+        >Extra Bots</a
+      >
+    </li>
   </ul>
 </nav>
+
+<style>
+  .h {
+    /* As a gradient "transition", move the gradient a bit. */
+    background-size: 100% 90px;
+    background-position: 0 -45px;
+  }
+  .h:hover {
+    background-position: 0 0;
+  }
+</style>
