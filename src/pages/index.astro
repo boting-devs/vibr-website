@@ -1,6 +1,5 @@
 ---
 import Nav from "../components/Nav.astro";
-import Main from "../components/Main.astro";
 import Footer from "../components/Footer.astro";
 ---
 
@@ -13,8 +12,29 @@ import Footer from "../components/Footer.astro";
     <title>Vibr Music Bot</title>
   </head>
   <body>
-    <Nav />
-    <Main />
+    <main class="bg-grey-200 text-white">
+      <div
+        class="h h-screen flex flex-col md:bg-[url('/background.png')] md:bg-stretch md:bg-center"
+      >
+        <Nav />
+        <div class="h-full">
+          <div class="flex flex-col justify-center items-center text-center h-full">
+            <h1 class="text-4xl md:text-5xl font-semibold mb-5">Vibr</h1>
+            <h2 class="text-xl md:text-2xl font-semibold mb-5 text-grey-800">
+              High quality music, in Discord, for free!
+            </h2>
+            <a
+              href="/invite"
+              class="bg-purple-500 px-5 py-2 rounded-xl transition-[transform, colors] hover:bg-teal-400 duration-300 hover:scale-110"
+              >Invite Now</a
+            >
+          </div>
+        </div>
+      </div>
+      <h2 class="mx-auto text-2xl text-center bg-purple-200 py-4">
+        🏗️ This Website is a Work in Progress 🏗️
+      </h2>
+    </main>
     <Footer />
   </body>
 </html>
