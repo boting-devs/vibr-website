@@ -9,12 +9,12 @@ import Footer from "../components/Footer.astro";
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vibr Music Bot</title>
+    <title>Vibr | Music Bot</title>
   </head>
-  <body>
-    <main class="bg-grey-200 text-white">
-      <div
-        class="h h-screen flex flex-col md:bg-[url('/background.png')] md:bg-cover bg-center"
+  <body class="bg-grey-200 text-white">
+    <main>
+      <section
+        class="h-screen flex flex-col md:bg-[url('/background.png')] md:bg-cover bg-center"
       >
         <Nav />
         <div class="h-full">
@@ -30,11 +30,11 @@ import Footer from "../components/Footer.astro";
             >
           </div>
         </div>
-      </div>
-      <h2 class="mx-auto text-2xl text-center bg-purple-200 py-4">
-        🏗️ This Website is a Work in Progress 🏗️
-      </h2>
+      </section>
     </main>
-    <Footer />
+    <h2 class="mx-auto text-2xl text-center bg-purple-200 py-4">
+      🏗️ This Website is a Work in Progress 🏗️
+    </h2>
   </body>
+  <Footer />
 </html>
