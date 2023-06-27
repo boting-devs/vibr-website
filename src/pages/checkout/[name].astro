@@ -1,0 +1,11 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { name: "247" } },
+    { params: { name: "extra-bot" } },
+    { params: { name: "extra-bot-x3" } },
+  ];
+}
+
+const { name } = Astro.props;
+---
