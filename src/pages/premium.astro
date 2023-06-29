@@ -1,14 +1,10 @@
 ---
 import Nav from "../components/Nav.astro";
+import Price from "../components/Price.astro";
 
-import { stripe } from "../global";
+import { stripe, ProductMetadata } from "../global";
 import type { Stripe } from "stripe";
 
-interface ProductMetadata {
-  readonly extra_product?: string;
-  readonly extra_description?: string;
-  readonly features: string;
-}
 type CombinedProduct = [
   Stripe.Response<Stripe.Product>,
   // "or $n annually"
@@ -61,47 +57,9 @@ const products = await Promise.all(productPromises);
     <Nav />
     <section class="flex flex-wrap justify-center">
       {
-        products.map(([product, extra_prices, extra_product]) => {
-          // Convert "109" into "1.09"
-          let price = (product.default_price as Stripe.Price)
-            .unit_amount_decimal as string;
-          price =
-            price.substring(0, price.length - 2) +
-            "." +
-            price.substring(price.length - 2);
-          if (price.startsWith(".")) {
-            price = "0" + price;
-          }
-          const metadata = product.metadata as unknown as ProductMetadata;
-
-          return (
-            <div class="p-1 w-72 m-4 bg-gradient-to-br from-purple-500 to-teal-500 rounded-2xl">
-              <div class="bg-grey-300 rounded-xl p-4 h-full w-full flex flex-col">
-                <h2 class="text-3xl font-semibold mb-6 text-center">{product.name}</h2>
-                <div class="mx-auto w-full text-center mb-7">
-                  <span class="text-teal-900">
-                    $<span class="text-3xl font-semibold p-1">{price}</span>
-                  </span>
-                  /{(product.default_price as Stripe.Price).recurring?.interval}
-                  {extra_product && (
-                    <div class="mt-1 text-purple-900">
-                      +$<span class="text-xl font-semibold">1.69</span> for 24/7 in both
-                      bots
-                    </div>
-                  )}
-                </div>
-                <ul class="list-image-[url('/check.webp')] list-inside mb-6">
-                  {metadata.features.split("\\n").map((feature) => (
-                    <li>{feature}</li>
-                  ))}
-                </ul>
-                <div class="px-10 text-center mx-auto w-full mt-auto py-2 rounded-lg bg-gradient-to-br from-purple-500 to-teal-500">
-                  <a class="font-bold text-lg">Subscribe</a>
-                </div>
-              </div>
-            </div>
-          );
-        })
+        products.map(([product, _extra_prices, extra_product]) => (
+          <Price {product} {extra_product} />
+        ))
       }
     </section>
   </body>
