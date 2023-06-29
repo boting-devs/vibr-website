@@ -1,5 +1,53 @@
 ---
 import Nav from "../components/Nav.astro";
+
+import { stripe } from "../global";
+import type { Stripe } from "stripe";
+
+interface ProductMetadata {
+  readonly extra_product?: string;
+  readonly extra_description?: string;
+  readonly features: string;
+}
+type CombinedProduct = [
+  Stripe.Response<Stripe.Product>,
+  // "or $n annually"
+  Stripe.Price[],
+  // "or $n for 24/7 added"
+  Stripe.Response<Stripe.Product> | undefined
+];
+
+const MAIN_PRODUCT_IDS = [
+  // 24/7
+  "prod_OAh9S7fYS9xtW2",
+  // Extra Bot (+ 27/7 extra)
+  "prod_OAjNULUFdb4wm4",
+  // Extra Bot (+ 24/7 extra) x 3
+  "prod_OAjVfM0q1tmWnQ",
+];
+const productPromises = MAIN_PRODUCT_IDS.map(
+  async (product_id): Promise<CombinedProduct> => {
+    const product = await stripe.products.retrieve(product_id, {
+      expand: ["default_price"],
+    });
+    const metadata = product.metadata as unknown as ProductMetadata;
+    let extra_product;
+    if (metadata.extra_product) {
+      extra_product = await stripe.products.retrieve(metadata.extra_product, {
+        expand: ["default_price"],
+      });
+    }
+
+    // Get more than default_price
+    const extra_prices = (
+      await stripe.prices.search({ query: `product:"${product.id}"` })
+    ).data.filter((price) => price.id !== (product.default_price as Stripe.Price).id);
+
+    return [product, extra_prices, extra_product];
+  }
+);
+
+const products = await Promise.all(productPromises);
 ---
 
 <!DOCTYPE html>
@@ -12,77 +60,49 @@ import Nav from "../components/Nav.astro";
   <body class="bg-grey-200 text-white">
     <Nav />
     <section class="flex flex-wrap justify-center">
-      <div
-        class="p-1 w-72 m-4 bg-gradient-to-br from-purple-500 to-teal-500 rounded-2xl"
-      >
-        <div class="bg-grey-300 rounded-xl p-4 h-full w-full flex flex-col">
-          <h2 class="text-3xl font-semibold mb-6 text-center">24/7</h2>
-          <div class="mx-auto w-full text-center mb-7">
-            <span class="text-teal-900"
-              >$<span class="text-3xl font-semibold p-1">0.99</span></span
-            >/month
-          </div>
-          <ul class="list-image-[url('/check.webp')] list-inside mb-6">
-            <li>Fully refundable for 7 days.</li>
-            <li>24/7 mode</li>
-          </ul>
-          <div
-            class="px-10 text-center mx-auto w-full mt-auto py-2 rounded-lg bg-gradient-to-br from-purple-500 to-teal-500"
-          >
-            <a class="font-bold text-lg" href="/checkout/247">Subscribe</a>
-          </div>
-        </div>
-      </div>
-      <div
-        class="p-1 w-72 m-4 bg-gradient-to-br from-purple-500 to-teal-500 rounded-2xl"
-      >
-        <div class="bg-grey-300 rounded-xl p-4 h-full w-full flex flex-col">
-          <h2 class="text-3xl font-semibold mb-6 text-center">Extra Bot</h2>
-          <div class="mx-auto w-full text-center mb-7">
-            <span class="text-teal-900"
-              >$<span class="text-3xl font-semibold p-1">2.69</span></span
-            >/month
-            <div class="mt-1 text-purple-900">
-              +$<span class="text-xl font-semibold">1.69</span> for 24/7 in both bots
+      {
+        products.map(([product, extra_prices, extra_product]) => {
+          // Convert "109" into "1.09"
+          let price = (product.default_price as Stripe.Price)
+            .unit_amount_decimal as string;
+          price =
+            price.substring(0, price.length - 2) +
+            "." +
+            price.substring(price.length - 2);
+          if (price.startsWith(".")) {
+            price = "0" + price;
+          }
+          const metadata = product.metadata as unknown as ProductMetadata;
+
+          return (
+            <div class="p-1 w-72 m-4 bg-gradient-to-br from-purple-500 to-teal-500 rounded-2xl">
+              <div class="bg-grey-300 rounded-xl p-4 h-full w-full flex flex-col">
+                <h2 class="text-3xl font-semibold mb-6 text-center">{product.name}</h2>
+                <div class="mx-auto w-full text-center mb-7">
+                  <span class="text-teal-900">
+                    $<span class="text-3xl font-semibold p-1">{price}</span>
+                  </span>
+                  /{(product.default_price as Stripe.Price).recurring?.interval}
+                  {extra_product && (
+                    <div class="mt-1 text-purple-900">
+                      +$<span class="text-xl font-semibold">1.69</span> for 24/7 in both
+                      bots
+                    </div>
+                  )}
+                </div>
+                <ul class="list-image-[url('/check.webp')] list-inside mb-6">
+                  {metadata.features.split("\\n").map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+                <div class="px-10 text-center mx-auto w-full mt-auto py-2 rounded-lg bg-gradient-to-br from-purple-500 to-teal-500">
+                  <a class="font-bold text-lg">Subscribe</a>
+                </div>
+              </div>
             </div>
-          </div>
-          <ul class="list-image-[url('/check.webp')] list-inside mb-6">
-            <li>Fully refundable for 7 days.</li>
-            <li>Optional 24/7 extra</li>
-          </ul>
-          <div
-            class="px-10 text-center mx-auto w-full mt-auto py-2 rounded-lg bg-gradient-to-br from-purple-500 to-teal-500"
-          >
-            <a class="font-bold text-lg" href="/checkout/extra-bot">Subscribe</a>
-          </div>
-        </div>
-      </div>
-      <div
-        class="p-1 w-72 h-96 m-4 bg-gradient-to-br from-purple-500 to-teal-500 rounded-2xl"
-      >
-        <div class="bg-grey-300 rounded-xl p-4 h-full w-full flex flex-col">
-          <h2 class="text-3xl font-semibold mb-6 text-center">Extra Bot x 3</h2>
-          <div class="mx-auto w-full text-center mb-7">
-            <span class="text-teal-900"
-              >$<span class="text-3xl font-semibold p-1">5.99</span></span
-            >/month
-            <div class="mt-1 text-purple-900">
-              +$<span class="text-xl font-semibold">2.49</span> for 24/7 in both bots
-            </div>
-          </div>
-          <ul class="list-image-[url('/check.webp')] list-inside mb-6">
-            <li>Fully refundable for 7 days.</li>
-            <li>Optional 24/7 extra</li>
-            <li>Save 26%</li>
-            <li>Save 50% on 24/7 extra</li>
-          </ul>
-          <div
-            class="px-10 text-center mx-auto w-full mt-auto py-2 rounded-lg bg-gradient-to-br from-purple-500 to-teal-500"
-          >
-            <a class="font-bold text-lg" href="/checkout/extra-bot-x3">Subscribe</a>
-          </div>
-        </div>
-      </div>
+          );
+        })
+      }
     </section>
   </body>
 </html>
